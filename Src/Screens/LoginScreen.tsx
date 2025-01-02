@@ -6,7 +6,8 @@ import { SearchUser, setUsername } from '../redux/features/LoginSlice';
 
 const LoginScreen = ({ navigation }: any) => {
   const dispatch = useDispatch<AppDispatch>();
-  const userName = useSelector((state: RootState) => state.login.userName);
+  const {userName,isLoading}=useSelector((state:RootState)=>state.login)
+  // const userName = useSelector((state: RootState) => state.login.userName);
 
   const [error, setError] = useState('');
 

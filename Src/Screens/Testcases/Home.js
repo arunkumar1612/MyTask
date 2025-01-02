@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import Home from '../Home'; // Adjust the path to the Home component
+import Home from '../Home';
 import { setPage, setLoading, SearchUser } from '../redux/features/LoginSlice';
 
 jest.mock('../redux/features/LoginSlice', () => ({

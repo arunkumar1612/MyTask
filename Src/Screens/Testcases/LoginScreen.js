@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import LoginScreen from '../LoginScreen'; // Adjust the path based on your file structure
+import LoginScreen from '../LoginScreen'; 
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
