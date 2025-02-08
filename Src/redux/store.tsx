@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import  counterSlice from './features/CounterSlice'
 import loginSlice from './features/LoginSlice'
 import {
     FLUSH,
@@ -13,7 +12,6 @@ import {
 
 export const store = configureStore({
   reducer: {
-    counter:counterSlice,
     login:loginSlice
   },
   middleware: getDefaultMiddleware =>

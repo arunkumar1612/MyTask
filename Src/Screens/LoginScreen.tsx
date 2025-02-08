@@ -6,7 +6,7 @@ import { SearchUser, setUsername } from '../redux/features/LoginSlice';
 
 const LoginScreen = ({ navigation }: any) => {
   const dispatch = useDispatch<AppDispatch>();
-  const {userName,isLoading}=useSelector((state:RootState)=>state.login)
+  const { userName, isLoading } = useSelector((state: RootState) => state.login)
   // const userName = useSelector((state: RootState) => state.login.userName);
 
   const [error, setError] = useState('');
@@ -32,29 +32,37 @@ const LoginScreen = ({ navigation }: any) => {
     }
 
     // Proceed with login logic
-    await dispatch(SearchUser());
-    navigation.navigate('Home');
-  };
+   const resultAction= await dispatch(SearchUser());
+    if (SearchUser.fulfilled.match(resultAction)) {
+      console.log('API Call Successful:', resultAction.payload);
+      navigation.navigate('Home');
+    } else {
+      console.log(
+        'API Call Failed:',
+        resultAction.payload || resultAction.error.message,
+      );
+    }
+};
 
-  return (
-    <View style={styles.container}>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={{ fontSize: 20, fontWeight: '900' }}>Login</Text>
-      </View>
-      <View style={{ marginTop: 10 }}>
-        <TextInput
-          value={userName}
-          onChangeText={handleInputChange}
-          placeholder="Enter your username"
-          style={styles.input}
-        />
-        {error ? <Text style={styles.errorText}>{error}</Text> : null}
-        <TouchableOpacity onPress={handleLogin} style={styles.touchable}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+return (
+  <View style={styles.container}>
+    <View style={{ alignItems: 'center' }}>
+      <Text style={{ fontSize: 20, fontWeight: '900' }}>Login</Text>
     </View>
-  );
+    <View style={{ marginTop: 10 }}>
+      <TextInput
+        value={userName}
+        onChangeText={handleInputChange}
+        placeholder="Enter your username"
+        style={styles.input}
+      />
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      <TouchableOpacity onPress={handleLogin} style={styles.touchable}>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+);
 };
 
 const styles = StyleSheet.create({
